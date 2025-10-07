@@ -3,5 +3,5 @@ Voltes V Members:
 Meckiah Alcantara,
 Chenny Asenjo,
 John Lloyd Ortega,
-Joradana Tapales,
+Jordana Tapales,
 Quennie Marie B. Pantalita 
