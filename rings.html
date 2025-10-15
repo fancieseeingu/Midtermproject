@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rings - Bejeweled</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+/* Bejeweled - Shared Stylesheet */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background: #fafafa;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 15px 40px;
+  border-bottom: 1px solid #eee;
+}
+
+header h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: 36px;
+  color: #000;
+}
+
+.top-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.top-links a {
+  text-decoration: none;
+  color: #444;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.top-links a:hover {
+  color: #d4af37;
+}
+
+/*  Navigation Icons  */
+.nav-icons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding: 15px 0;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-icons a {
+  text-align: center;
+  text-decoration: none;
+  color: #444;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.nav-icons a img {
+  display: block;
+  margin: 0 auto 8px auto;
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.nav-icons a:hover img {
+  border-color: #d4af37;
+}
+
+.nav-icons a:hover {
+  color: #d4af37;
+}
+
+/* Hero Section */
+.hero {
+  background: url('assets/hero.jpg') center/cover no-repeat;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  text-align: center;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.hero-content h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.hero-content button {
+  padding: 10px 20px;
+  background: #d4af37;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hero-content button:hover {
+  background: #b8962e;
+  color: #fff;
+}
+
+/* Product Section */
+.section {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  background: #fff;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.product img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.product h4 {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.product p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.product button {
+  padding: 8px 14px;
+  border: none;
+  background: #d4af37;
+  color: #000;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product button:hover {
+  background: #b8962e;
+  color: #fff;
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid #eee;
+  color: #444;
+  padding: 20px;
+  background: #fff;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <h1>Bejeweled</h1>
+  <div class="top-links">
+    <a href="account.html">My Account</a>
+    <a href="cart.html">Cart</a>
+    <a href="shoppingbag.html">Shopping Bag</a>
+  </div>
+</header>
+
+<!-- Navigation with Icons -->
+<div class="nav-icons">
+  <a href="necklace.html">
+    <img src="assets/icons/necklace.png" alt="Necklaces">
+    <span>Necklaces</span>
+</a>
+  <a href="rings.html">
+    <img src="assets/icons/ring.png" alt="Rings">
+    <span>Rings</span>
+</a>
+  <a href="earrings.html">
+    <img src="assets/icons/earring.png" alt="Earrings">
+    <span>Earrings</span>
+</a>
+  <a href="chains.html">
+    <img src="assets/icons/chain.png" alt="Chains">
+    <span>Chains</span>
+</a>
+  <a href="bracelet.html">
+    <img src="assets/icons/bracelet.png" alt="Bracelets">
+    <span>Bracelets</span>
+</a>
+</div>
+
+<!-- Hero Section -->
+><section class="hero">
+  <div class="hero-content">
+    <h2>Adorn Your Hands with Radiant Rings</h2>
+    <p>Celebrate every moment with our exquisite ring collection — crafted to symbolize love, strength, and timeless beauty.</p>
+    <button>Shop Rings</button>
+  </div>
+</section>
+
+
+<!-- Rings Product Section -->
+<section class="section">
+  <h2>Rings Collection</h2>
+  <div class="products">
+    <div class="product">
+      <img src="assets/R/r1.jpg" alt="Diamond Ring">
+      <h4>Diamond Ring</h4>
+      <p>$300</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="assets/R/r2.jpg" alt="Gold Band">
+      <h4>Gold Band</h4>
+      <p>$180</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="assets/R/r3.jpg" alt="Rose Gold Halo">
+      <h4>Rose Gold Halo</h4>
+      <p>$250</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="assets/R/r4.jpg" alt="Sapphire Stone Ring">
+      <h4>Sapphire Stone Ring</h4>
+      <p>$280</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="assets/R/r4.jpg" alt="Ruby Stone Gold Ring">
+      <h4>Ruby Stone Gold Ring</h4>
+      <p>$300</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="assets/R/r4.jpg" alt="Gemstone Ring">
+      <h4>Gemstone Ring</h4>
+      <p>$230</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="assets/R/r4.jpg" alt="Classic Solitaire Ring">
+      <h4>Classic Solitaire Ring</h4>
+      <p>$250</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="assets/R/r4.jpg" alt="Cocktail Ring">
+      <h4>Cocktail Ring</h4>
+      <p>$200</p>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Bejeweled. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
