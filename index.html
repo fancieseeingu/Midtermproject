@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bejeweled</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #333;
+    }
+
+    header {
+      background: #fff;
+      padding: 15px 50px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: "Great Vibes", cursive;
+      font-size: 38px;
+      margin: 0;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .top-links a {
+      text-decoration: none;
+      color: #555;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .top-links a:hover {
+      color: #d4af37;
+      text-decoration: underline;
+      transition: 0.3s ease;
+    }
+
+    .nav-menu {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px 0;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .nav-item img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .nav-item a {
+      text-decoration: none;
+      color: #555;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .nav-item a:hover {
+      color: #d4af37;
+      text-decoration: underline;
+    }
+
+    .hero {
+      background: url("assets/HP-pic/ww.jpg") no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .hero-content {
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .hero-content h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .hero-content button {
+      padding: 10px 20px;
+      border: none;
+      background: #d4af37;
+      color: #000;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .hero-content button:hover {
+      background: #b8962e;
+      color: #fff;
+      transform: scale(1.05);
+      transition: 0.3s ease;
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      background: #fff;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .product h4 {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .product p {
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .product button {
+      padding: 8px 14px;
+      border: none;
+      background: #d4af37;
+      color: #000;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background: #b8962e;
+      color: #fff;
+      transform: scale(1.05);
+      transition: 0.3s ease;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      border-top: 1px solid #eee;
+      color: #444;
+      padding: 20px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <h1 class="logo">Bejeweled</h1>
+    <div class="top-links">
+      <a href="#">My Account</a>
+      <a href="#">Cart</a>
+      <a href="#">Shopping Bag</a>
+    </div>
+  </header>
+
+  <!-- Category Navigation with Images -->
+  <div class="nav-menu">
+    <div class="nav-item">
+      <img src="assets/HP-pic/1.jpg" alt="Necklaces">
+      <a href="necklaces.html">Necklaces</a>
+    </div>
+    <div class="nav-item">
+      <img src="assets/HP-pic/2.jpg" alt="Rings">
+      <a href="rings.html">Rings</a>
+    </div>
+    <div class="nav-item">
+      <img src="assets/HP-pic/3.jpg" alt="Earrings">
+      <a href="earrings.html">Earrings</a>
+    </div>
+    <div class="nav-item">
+      <img src="assets/HP-pic/4.jpg" alt="Chains">
+      <a href="chains.html">Chains</a>
+    </div>
+    <div class="nav-item">
+      <img src="assets/HP-pic/5.jpg" alt="Bracelets">
+      <a href="bracelets.html">Bracelets</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Elevate Your Style with Timeless Elegance</h2>
+      <p>Discover jewelry that speaks to your soul. At Bejeweled, each piece is a celebration of beauty, love, and individuality.</p>
+      <button>Shop Now</button>
+    </div>
+  </section>
+
+  <!-- Featured Jewelry -->
+  <section class="section">
+    <h2>Featured Jewelry</h2>
+    <div class="products">
+      <div class="product"><img src="assets/HP-pic/5.jpg" alt="Bracelet"><h4>8 Karat Diamond Bracelet</h4><p>$299</p><button>Add to Cart</button></div>
+      <div class="product"><img src="assets/HP-pic/2.jpg" alt="Ring"><h4>Crystal Love Ring</h4><p>$120</p><button>Add to Cart</button></div>
+      <div class="product"><img src="assets/HP-pic/4.jpg" alt="Gold Chain"><h4>Gold Minimal Chain</h4><p>$150</p><button>Add to Cart</button></div>
+      <div class="product"><img src="assets/HP-pic/3.jpg" alt="Pearl Earrings"><h4>Pearl Drop Earrings</h4><p>$180</p><button>Add to Cart</button></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Bejeweled. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
