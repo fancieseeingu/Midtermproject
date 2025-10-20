@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Earrings - BEJEWELED</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: #000;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .header-left a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .header-left a:hover {
+            color: #d4af37;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .header-right a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .header-right a:hover {
+            color: #d4af37;
+        }
+
+        /* NAVIGATION */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 20px 0;
+            background: #000;
+            border-bottom: 1px solid #333;
+        }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navigation a:hover {
+            color: #d4af37;
+        }
+
+        .navigation a.active {
+            color: #d4af37;
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #d4af37;
+            transition: width 0.3s ease;
+        }
+
+        .navigation a:hover::after,
+        .navigation a.active::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            text-align: right;
+            max-width: 500px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* CATEGORY NAVIGATION */
+        .category-nav {
+            padding: 40px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .category-nav input[type="radio"] {
+            display: none;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #333;
+            padding: 12px 30px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 15px;
+            border-radius: 5px;
+        }
+
+        .category-btn:hover {
+            background: #d4af37;
+            color: #fff;
+        }
+
+        /* Active state */
+        #show-all:checked~.category-nav label[for="show-all"],
+        #show-stud:checked~.category-nav label[for="show-stud"],
+        #show-hoop:checked~.category-nav label[for="show-hoop"],
+        #show-drop:checked~.category-nav label[for="show-drop"],
+        #show-chandelier:checked~.category-nav label[for="show-chandelier"],
+        #show-huggie:checked~.category-nav label[for="show-huggie"] {
+            background: #d4af37;
+            color: #fff;
+        }
+
+        /* PRODUCT SECTIONS */
+        .category-section {
+            display: none;
+            padding: 60px 40px;
+            background: #f5f5f5;
+        }
+
+        .all-products-section {
+            display: none;
+            padding: 60px 40px;
+            background: #f5f5f5;
+        }
+
+        /* Show sections based on selected radio button */
+        #show-all:checked~.products-container .all-products-section {
+            display: block;
+        }
+
+        #show-stud:checked~.products-container #stud-section {
+            display: block;
+        }
+
+        #show-hoop:checked~.products-container #hoop-section {
+            display: block;
+        }
+
+        #show-drop:checked~.products-container #drop-section {
+            display: block;
+        }
+
+        #show-chandelier:checked~.products-container #chandelier-section {
+            display: block;
+        }
+
+        #show-huggie:checked~.products-container #huggie-section {
+            display: block;
+        }
+
+        /* SECTION TITLE ON LEFT SIDE */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #333;
+            margin: 0;
+        }
+
+        /* PRODUCT GRID - 4 COLUMNS */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* PRODUCT CARD - WHITE BACKGROUND */
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-info {
+            text-align: center;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            color: #2c3e50;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #d4af37;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        /* ADD TO CART BUTTON - GOLD */
+        .add-to-cart {
+            background: #d4af37;
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .add-to-cart:hover {
+            background: #b8941f;
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #000;
+            border-top: 1px solid #333;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .navigation {
+                gap: 30px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-left">
+            <a href="store.html">Find a Store</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <a href="bulgari-style-homepage.html" class="logo">BEJEWELED</a>
+
+        <div class="header-right">
+           
+            <a href="login.html">My Account</a>
+            <a href="cart-r.html">Shopping Bag </a>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+     <nav class="navigation">
+        <a href="main.html">Home</a>
+        <a href="necklace.html">Necklaces</a>
+        <a href="bracelet.html">Bracelets</a>
+        <a href="ring.html">Rings</a>
+        <a href="earring.html" class="active">Earrings</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <img src="assets/E/bg-c.jpg" alt="Luxury Earring Collection" />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Earrings</h1>
+            <p class="hero-subtitle">Discover our exquisite collection of earrings, from elegant studs to statement chandeliers. Each piece is crafted with precision and adorned with the finest materials.</p>
+        </div>
+    </section>
+
+    <!-- RADIO BUTTONS FOR FILTERING -->
+    <input type="radio" id="show-all" name="category" checked>
+    <input type="radio" id="show-stud" name="category">
+    <input type="radio" id="show-hoop" name="category">
+    <input type="radio" id="show-drop" name="category">
+    <input type="radio" id="show-chandelier" name="category">
+    <input type="radio" id="show-huggie" name="category">
+
+    <!-- CATEGORY NAVIGATION -->
+    <div class="category-nav">
+        <label for="show-all" class="category-btn">All</label>
+        <label for="show-stud" class="category-btn">Stud</label>
+        <label for="show-hoop" class="category-btn">Hoop</label>
+        <label for="show-drop" class="category-btn">Drop</label>
+        <label for="show-chandelier" class="category-btn">Chandelier</label>
+        <label for="show-huggie" class="category-btn">Huggie</label>
+    </div>
+
+    <!-- PRODUCTS CONTAINER -->
+    <div class="products-container">
+        <!-- ALL PRODUCTS SECTION (MIXED) -->
+        <section class="all-products-section">
+            <div class="section-header">
+                <h2 class="category-title">All Earrings</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Stud Earrings (8) -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s1.jpg" alt="Diamond Stud Classic" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Stud Classic</h3>
+                        <p class="product-price">$180</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s2.jpg" alt="Pearl Stud Elegance" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Pearl Stud Elegance</h3>
+                        <p class="product-price">$120</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s3.jpg" alt="Gold Ball Stud" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gold Ball Stud</h3>
+                        <p class="product-price">$95</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s4.jpg" alt="Emerald Stud Luxury" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Emerald Stud Luxury</h3>
+                        <p class="product-price">$250</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s5.jpg" alt="Ruby Stud Radiance" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Ruby Stud Radiance</h3>
+                        <p class="product-price">$220</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s6.jpg" alt="Sapphire Stud Brilliance" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Sapphire Stud Brilliance</h3>
+                        <p class="product-price">$280</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s7.jpg" alt="Rose Gold Stud" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Rose Gold Stud</h3>
+                        <p class="product-price">$150</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s8.jpg" alt="Platinum Stud Premium" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Platinum Stud Premium</h3>
+                        <p class="product-price">$320</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+
+                <!-- Hoop Earrings (8) -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h1.jpg" alt="Classic Gold Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Classic Gold Hoops</h3>
+                        <p class="product-price">$140</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h2.jpg" alt="Diamond Encrusted Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Encrusted Hoops</h3>
+                        <p class="product-price">$380</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h3.jpg" alt="Silver Twisted Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Silver Twisted Hoops</h3>
+                        <p class="product-price">$110</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h4.jpg" alt="Rose Gold Mini Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Rose Gold Mini Hoops</h3>
+                        <p class="product-price">$85</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h5.jpg" alt="Large Statement Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Large Statement Hoops</h3>
+                        <p class="product-price">$200</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h6.jpg" alt="Textured Gold Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Textured Gold Hoops</h3>
+                        <p class="product-price">$165</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h7.jpg" alt="Gemstone Hoop Earrings" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gemstone Hoop Earrings</h3>
+                        <p class="product-price">$290</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h8.jpg" alt="Vintage Style Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Vintage Style Hoops</h3>
+                        <p class="product-price">$175</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+
+                <!-- Drop Earrings (8) -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d1.jpg" alt="Crystal Teardrop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Crystal Teardrop</h3>
+                        <p class="product-price">$160</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d2.jpg" alt="Pearl Drop Elegance" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Pearl Drop Elegance</h3>
+                        <p class="product-price">$190</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d3.jpg" alt="Diamond Drop Luxury" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Drop Luxury</h3>
+                        <p class="product-price">$420</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d4.jpg" alt="Gold Leaf Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gold Leaf Drop</h3>
+                        <p class="product-price">$135</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d5.jpg" alt="Amethyst Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Amethyst Drop</h3>
+                        <p class="product-price">$210</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d6.jpg" alt="Chandelier Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Chandelier Drop</h3>
+                        <p class="product-price">$350</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d7.jpg" alt="Turquoise Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Turquoise Drop</h3>
+                        <p class="product-price">$145</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d8.jpg" alt="Art Deco Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Art Deco Drop</h3>
+                        <p class="product-price">$275</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+
+                <!-- Chandelier Earrings (8) -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c1.jpg" alt="Crystal Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Crystal Chandelier</h3>
+                        <p class="product-price">$320</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c2.jpg" alt="Gold Filigree Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gold Filigree Chandelier</h3>
+                        <p class="product-price">$280</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c3.jpg" alt="Pearl Cascade Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Pearl Cascade Chandelier</h3>
+                        <p class="product-price">$390</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c4.jpg" alt="Diamond Chandelier Luxury" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Chandelier Luxury</h3>
+                        <p class="product-price">$650</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c5.jpg" alt="Vintage Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Vintage Chandelier</h3>
+                        <p class="product-price">$245</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c6.jpg" alt="Bohemian Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Bohemian Chandelier</h3>
+                        <p class="product-price">$195</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c7.jpg" alt="Art Nouveau Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Art Nouveau Chandelier</h3>
+                        <p class="product-price">$425</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c8.jpg" alt="Modern Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Modern Chandelier</h3>
+                        <p class="product-price">$310</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+
+                <!-- Huggie Earrings (8) -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu1.jpg" alt="Diamond Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Huggie</h3>
+                        <p class="product-price">$240</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu2.jpg" alt="Gold Textured Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gold Textured Huggie</h3>
+                        <p class="product-price">$125</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu3.jpg" alt="Silver Huggie Classic" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Silver Huggie Classic</h3>
+                        <p class="product-price">$95</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu4.jpg" alt="Rose Gold Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Rose Gold Huggie</h3>
+                        <p class="product-price">$155</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu5.jpg" alt="Gemstone Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gemstone Huggie</h3>
+                        <p class="product-price">$185</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu6.jpg" alt="Minimalist Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Minimalist Huggie</h3>
+                        <p class="product-price">$75</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu7.jpg" alt="Twisted Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Twisted Huggie</h3>
+                        <p class="product-price">$135</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu8.jpg" alt="Pave Huggie Luxury" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Pave Huggie Luxury</h3>
+                        <p class="product-price">$295</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUD EARRINGS SECTION -->
+        <section id="stud-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Stud Earrings</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s1.jpg" alt="Diamond Stud Classic" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Stud Classic</h3>
+                        <p class="product-price">$180</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s2.jpg" alt="Pearl Stud Elegance" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Pearl Stud Elegance</h3>
+                        <p class="product-price">$120</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s3.jpg" alt="Gold Ball Stud" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gold Ball Stud</h3>
+                        <p class="product-price">$95</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s4.jpg" alt="Emerald Stud Luxury" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Emerald Stud Luxury</h3>
+                        <p class="product-price">$250</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s5.jpg" alt="Ruby Stud Radiance" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Ruby Stud Radiance</h3>
+                        <p class="product-price">$220</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s6.jpg" alt="Sapphire Stud Brilliance" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Sapphire Stud Brilliance</h3>
+                        <p class="product-price">$280</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s7.jpg" alt="Rose Gold Stud" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Rose Gold Stud</h3>
+                        <p class="product-price">$150</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/s8.jpg" alt="Platinum Stud Premium" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Platinum Stud Premium</h3>
+                        <p class="product-price">$320</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOOP EARRINGS SECTION -->
+        <section id="hoop-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Hoop Earrings</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h1.jpg" alt="Classic Gold Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Classic Gold Hoops</h3>
+                        <p class="product-price">$140</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h2.jpg" alt="Diamond Encrusted Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Encrusted Hoops</h3>
+                        <p class="product-price">$380</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h3.jpg" alt="Silver Twisted Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Silver Twisted Hoops</h3>
+                        <p class="product-price">$110</p><a href="cart-e.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h4.jpg" alt="Rose Gold Mini Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Rose Gold Mini Hoops</h3>
+                        <p class="product-price">$85</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h5.jpg" alt="Large Statement Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Large Statement Hoops</h3>
+                        <p class="product-price">$200</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h6.jpg" alt="Textured Gold Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Textured Gold Hoops</h3>
+                        <p class="product-price">$165</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h7.jpg" alt="Gemstone Hoop Earrings" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gemstone Hoop Earrings</h3>
+                        <p class="product-price">$290</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/h8.jpg" alt="Vintage Style Hoops" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Vintage Style Hoops</h3>
+                        <p class="product-price">$175</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DROP EARRINGS SECTION -->
+        <section id="drop-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Drop Earrings</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d1.jpg" alt="Crystal Teardrop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Crystal Teardrop</h3>
+                        <p class="product-price">$160</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d2.jpg" alt="Pearl Drop Elegance" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Pearl Drop Elegance</h3>
+                        <p class="product-price">$190</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d3.jpg" alt="Diamond Drop Luxury" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Drop Luxury</h3>
+                        <p class="product-price">$420</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d4.jpg" alt="Gold Leaf Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gold Leaf Drop</h3>
+                        <p class="product-price">$135</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d5.jpg" alt="Amethyst Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Amethyst Drop</h3>
+                        <p class="product-price">$210</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d6.jpg" alt="Chandelier Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Chandelier Drop</h3>
+                        <p class="product-price">$350</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d7.jpg" alt="Turquoise Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Turquoise Drop</h3>
+                        <p class="product-price">$145</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/d8.jpg" alt="Art Deco Drop" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Art Deco Drop</h3>
+                        <p class="product-price">$275</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHANDELIER EARRINGS SECTION -->
+        <section id="chandelier-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Chandelier Earrings</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c1.jpg" alt="Crystal Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Crystal Chandelier</h3>
+                        <p class="product-price">$320</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c2.jpg" alt="Gold Filigree Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gold Filigree Chandelier</h3>
+                        <p class="product-price">$280</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c3.jpg" alt="Pearl Cascade Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Pearl Cascade Chandelier</h3>
+                        <p class="product-price">$390</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c4.jpg" alt="Diamond Chandelier Luxury" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Chandelier Luxury</h3>
+                        <p class="product-price">$650</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c5.jpg" alt="Vintage Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Vintage Chandelier</h3>
+                        <p class="product-price">$245</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c6.jpg" alt="Bohemian Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Bohemian Chandelier</h3>
+                        <p class="product-price">$195</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c7.jpg" alt="Art Nouveau Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Art Nouveau Chandelier</h3>
+                        <p class="product-price">$425</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/c8.jpg" alt="Modern Chandelier" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Modern Chandelier</h3>
+                        <p class="product-price">$310</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HUGGIE EARRINGS SECTION -->
+        <section id="huggie-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Huggie Earrings</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu1.jpg" alt="Diamond Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Diamond Huggie</h3>
+                        <p class="product-price">$240</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu2.jpg" alt="Gold Textured Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gold Textured Huggie</h3>
+                        <p class="product-price">$125</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu3.jpg" alt="Silver Huggie Classic" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Silver Huggie Classic</h3>
+                        <p class="product-price">$95</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu4.jpg" alt="Rose Gold Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Rose Gold Huggie</h3>
+                        <p class="product-price">$155</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu5.jpg" alt="Gemstone Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Gemstone Huggie</h3>
+                        <p class="product-price">$185</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu6.jpg" alt="Minimalist Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Minimalist Huggie</h3>
+                        <p class="product-price">$75</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu7.jpg" alt="Twisted Huggie" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Twisted Huggie</h3>
+                        <p class="product-price">$135</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/E/hu8.jpg" alt="Pave Huggie Luxury" />
+                        </div><div class="product-info">
+                        <h3 class="product-name">Pave Huggie Luxury</h3>
+                        <p class="product-price">$295</p><a href="cart-b.html" class="add-to-cart">Add to Cart</a></div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About BEJEWELED</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Craftsmanship</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Collections</h3>
+                <ul>
+                    <li><a href="#">High Jewellery</a></li>
+                    <li><a href="#">Bracelets</a></li>
+                    <li><a href="#">Earrings</a></li>
+                    <li><a href="#">Necklaces</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BEJEWELED. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
