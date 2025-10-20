@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Account</title>
+
+  <!-- Font Awesome for icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+  <style>
+    :root {
+    --primary-blue: #00215E;
+    --accent-yellow: #FFC55A;
+    --text-dark: #1A1A1A;
+    --text-light: #fff;
+    --section-gray: #f5f5f5;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+  .top-banner {
+    background: #001947e3;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eee;
+    color: var(--accent-yellow);
+    font-family: 'Playfair Display', serif;
+  }
+  .banner-text {
+    color: var(--accent-yellow);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: var(--section-gray);
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .header-left,
+  .header-right {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  .header-left a,
+  .header-right a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+  .header-left a:hover,
+  .header-right a:hover {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 8px;
+    color: var(--primary-blue);
+    text-decoration: none;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 20px 0;
+    background: var(--section-gray);
+    border-bottom: 1px solid #eee;
+  }
+  .navigation a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.19s;
+    position: relative;
+    border-bottom: 2px solid transparent;
+  }
+  .navigation a:hover {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+  }
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+    }
+
+    /* Top Utility Bar */
+    .utility-bar {
+      background-color: #ffffff;
+      padding: 10px 20px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .utility-bar a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .utility-bar i {
+      margin-right: 6px;
+      color: #ffffff;
+      font-size: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    .utility-bar a:hover i {
+      transform: scale(1.2);
+    }
+
+    /* Intro Text */
+    .intro-text {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin: 40px 20px 10px;
+      color: #00215E;
+    }
+
+    .intro-subtext {
+      text-align: center;
+      font-size: 16px;
+      margin: 0 auto 30px;
+      color: #00215E;
+      white-space: nowrap;
+      overflow-x: auto;
+      max-width: 100%;
+      letter-spacing: 0.5px;
+    }
+
+    /* Login Container (flat layout) */
+    .login-container {
+      max-width: 500px;
+      margin: 0 auto 60px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #dddddd;
+    }
+
+    .tabs div {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #00215E;
+      border-bottom: 2px solid transparent;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .tabs .active {
+      border-bottom: 2px solid #333333;
+      color: #00215E;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #00215E;
+      letter-spacing: 0.5px;
+    }
+
+    form input[type="email"],
+    form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      font-size: 14px;
+      color: #666666;
+      letter-spacing: 0.5px;
+    }
+
+    .remember-forgot label {
+      display: flex;
+      align-items: center;
+    }
+
+    .remember-forgot input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .remember-forgot a {
+      text-decoration: none;
+      color: #666666;
+    }
+
+    .login-button {
+      background-color: #f8f8f8;
+      color: #00215E;
+      padding: 12px;
+      width: 100%;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+
+    .login-button:hover {
+      background-color: #eaeaea;
+    }
+
+    @media (max-width: 600px) {
+      .login-container {
+        margin: 20px;
+      }
+
+      .utility-bar {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .footer {
+    background: var(--section-gray);
+    border-top: 1px solid #eee;
+    padding: 60px 40px 30px;
+    color: var(--primary-blue);
+  }
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+  }
+  .footer-section h3 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+  }
+  .footer-section ul {
+    list-style: none;
+  }
+  .footer-section ul li {
+    margin-bottom: 12px;
+  }
+  .footer-section ul li a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+  }
+  .footer-section ul li a:hover {
+    color: var(--accent-yellow);
+  }
+  .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    color: #003392;
+    font-size: 12px;
+  }
+  </style>
+</head>
+<body>
+    <div class="top-banner">
+        <span class="banner-text">Experience magnificent craftsmanship and luxury with the new collection</span>
+      </div>
+      <header class="header">
+        <div class="header-left">
+          <a href="store.html">Find a Store</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <a href="main.html" class="logo">BEJEWELED</a>
+        <div class="header-right">
+          <a href="login.html">My Account</a>
+          <a href="#">Shopping Cart (0)</a>
+        </div>
+      </header>
+      <nav class="navigation">
+        <a href="n.html">Necklace</a>
+        <a href="r.html">Bracelet</a>
+        <a href="e.html">Rings</a>
+        <a href="#">Earrings</a>
+        <a href="#">Watches</a>
+      </nav>
+
+  <!-- Top Utility Bar -->
+  <div class="utility-bar">
+    <div>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> Find a Store</a>
+      <a href="#"><i class="fas fa-concierge-bell"></i> Services</a>
+      <a href="#"><i class="fas fa-phone"></i> Contact Us</a>
+      <a href="#"><i class="fas fa-search"></i> Search</a>
+    </div>
+    <div>
+      <a href="#"><i class="fas fa-envelope"></i> Newsletter</a>
+      <a href="#"><i class="fas fa-user"></i> My Account</a>
+      <a href="#"><i class="fas fa-heart"></i> My Wishlist</a>
+      <a href="#"><i class="fas fa-shopping-bag"></i> Shopping Bag</a>
+    </div>
+  </div>
+
+  <!-- Intro Text -->
+  <div class="intro-text">PLEASE SIGN IN OR REGISTER</div>
+  <div class="intro-subtext">
+    Create your account to be part of the BEJEWELED world, discover our new collections, receive news from the maison.
+  </div>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <div class="tabs">
+      <div class="active">Login</div>
+      <div>Create New Account</div>
+    </div>
+
+    <form action="#" method="post">
+      <label for="email">E-MAIL ADDRESS</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">PASSWORD</label>
+      <input type="password" id="password" name="password" required>
+
+      <div class="remember-forgot">
+        <label><input type="checkbox" name="remember"> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="login-button">LOGIN</button>
+    </form>
+  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="#">Care Instructions</a></li>
+          <li><a href="#">After Sales Services</a></li>
+          <li><a href="#">Digital Warranties</a></li>
+          <li><a href="#">Book an Appointment</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="#">Send a Message</a></li>
+          <li><a href="#">Book a Virtual Appointment</a></li>
+          <li><a href="#">Find a Store</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>About Bejeweled</h3>
+        <ul>
+          <li><a href="#">Our Commitment</a></li>
+          <li><a href="#">Ethics & Compliance</a></li>
+          <li><a href="#">People and Careers</a></li>
+          <li><a href="#">Brand Protection</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Privacy Center</h3>
+        <ul>
+          <li><a href="#">Cookie Settings</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Bejeweled. All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
+fonts.googleapis.com
