@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BEJEWELED</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --primary-blue: #00215E;
+    --accent-yellow: #FFC55A;
+    --text-dark: #1A1A1A;
+    --text-light: #fff;
+    --section-gray: #f5f5f5;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+  .top-banner {
+    background: #001947e3;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eee;
+    color: var(--accent-yellow);
+    font-family: 'Playfair Display', serif;
+  }
+  .banner-text {
+    color: var(--accent-yellow);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: var(--section-gray);
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .header-left,
+  .header-right {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  .header-left a,
+  .header-right a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+  .header-left a:hover,
+  .header-right a:hover {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 8px;
+    color: var(--primary-blue);
+    text-decoration: none;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 20px 0;
+    background: var(--section-gray);
+    border-bottom: 1px solid #eee;
+  }
+  .navigation a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.19s;
+    position: relative;
+    border-bottom: 2px solid transparent;
+  }
+  .navigation a:hover {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+  }
+  .hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: #fff;
+  }
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(0, 33, 94, 0.22),
+      rgba(255, 197, 90, 0.09)
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-content {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    max-width: 600px;
+    color: white;
+    z-index: 2;
+    text-align: left;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+  .hero-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+    max-width: 600px;
+    color: white;
+  }
+  .cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cta-button:hover {
+    background: var(--accent-yellow);
+    color: var(--primary-blue);
+    border-color: var(--accent-yellow);
+  }
+  /* Override for Celestial and Featured buttons */
+  .celestial-collection .cta-button,
+  .featured .cta-button {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    background: transparent;
+  }
+  .celestial-collection .cta-button:hover,
+  .featured .cta-button:hover {
+    background: var(--accent-yellow);
+    color: var(--primary-blue);
+    border-color: var(--accent-yellow);
+  }
+  .collections {
+    padding: 100px 40px;
+    background: #fff;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 80px;
+    letter-spacing: 2px;
+    color: var(--primary-blue);
+  }
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .collection-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border-radius: 10px;
+    background: var(--section-gray);
+    box-shadow: 0 2px 14px #eee;
+  }
+  .collection-item:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 7px 20px #eee;
+  }
+  .collection-item img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.2s;
+    border-radius: 10px 10px 0 0;
+  }
+  .collection-item:hover img {
+    transform: scale(1.05);
+  }
+  .collection-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 33, 94, 0.8));
+    padding: 40px 20px 20px;
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+  }
+  .collection-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    color: white;
+  }
+  .collection-price {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--accent-yellow);
+    letter-spacing: 1px;
+  }
+  .celestial-collection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--section-gray);
+    padding: 80px 60px;
+    gap: 50px;
+    align-items: center;
+    color: var(--primary-blue);
+    border-radius: 16px;
+    margin: 40px auto;
+    max-width: 1400px;
+  }
+  .celestial-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 28px;
+    color: var(--primary-blue);
+  }
+  .celestial-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 480px;
+    color: #003392;
+  }
+  .celestial-image img {
+    width: 100%;
+    min-height: 350px;
+    border-radius: 14px;
+    object-fit: cover;
+    max-height: 450px;
+    background: #eee;
+    border: 1px solid #ccc;
+  }
+  .featured {
+    padding: 100px 0;
+    background: var(--section-gray);
+  }
+  .featured-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .featured-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    color: var(--primary-blue);
+  }
+  .featured-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: #003392;
+  }
+  .featured-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    background: #eee;
+    border-radius: 12px;
+    border: 2px solid var(--primary-blue);
+  }
+  .footer {
+    background: var(--section-gray);
+    border-top: 1px solid #eee;
+    padding: 60px 40px 30px;
+    color: var(--primary-blue);
+  }
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+  }
+  .footer-section h3 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+  }
+  .footer-section ul {
+    list-style: none;
+  }
+  .footer-section ul li {
+    margin-bottom: 12px;
+  }
+  .footer-section ul li a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+  }
+  .footer-section ul li a:hover {
+    color: var(--accent-yellow);
+  }
+  .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    color: #003392;
+    font-size: 12px;
+  }
+  @media (max-width: 900px) {
+    .celestial-collection,
+    .featured-content {
+      grid-template-columns: 1fr;
+      padding: 40px 20px;
+    }
+    .celestial-text {
+      text-align: center;
+    }
+    .celestial-image img,
+    .featured-image img {
+      max-height: 300px;
+    }
+    .collections,
+    .featured,
+    .footer {
+      padding: 40px 20px;
+    }
+    .hero {
+      height: auto;
+    }
+    .hero-video {
+      height: 300px;
+    }
+    .hero-content {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      padding: 20px;
+      max-width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="top-banner">
+    <span class="banner-text">Experience magnificent craftsmanship and luxury with the new collection</span>
+  </div>
+  <header class="header">
+    <div class="header-left">
+      <a href="store.html">Find a Store</a>
+
+      <a href="#">Contact Us</a>
+    </div>
+    <a href="main.html" class="logo">BEJEWELED</a>
+    <div class="header-right">
+      <a href="login.html">My Account</a>
+      <a href="#">Shopping Cart (0)</a>
+    </div>
+  </header>
+  <nav class="navigation">
+    <a href="n.html">Necklace</a>
+    <a href="r.html">Bracelet</a>
+    <a href="e.html">Rings</a>
+    <a href="#">Earrings</a>
+    <a href="#">Watches</a>
+  </nav>
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="k1.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Timeless Elegance</h1>
+      <p class="hero-subtitle">
+        Discover jewelry that speaks to your soul. Each piece is a celebration of
+        beauty, love, and individuality crafted with the finest materials.
+      </p>
+      <a href="login.html" class="cta-button">Explore Collection</a>
+    </div>
+  </section>
+  <section class="collections">
+    <h2 class="section-title">Featured Collections</h2>
+    <div class="collection-grid">
+      <div class="collection-item">
+        <img src="1b.jpg" alt="Maharani Collection" />
+        <div class="collection-overlay">
+          <h3 class="collection-name">Maharani de Chaumet</h3>
+          <p class="collection-price">From $2,000</p>
+        </div>
+      </div>
+      <div class="collection-item">
+        <img src="2b.jpg" alt="Serpent Collection" />
+        <div class="collection-overlay">
+          <h3 class="collection-name">Serpent Collection</h3>
+          <p class="collection-price">From $120</p>
+        </div>
+      </div>
+      <div class="collection-item">
+        <img src="3b.jpg" alt="Folie des Prés" />
+        <div class="collection-overlay">
+          <h3 class="collection-name">Folie des Prés</h3>
+          <p class="collection-price">From $150</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="celestial-collection">
+    <div class="celestial-text">
+      <h2>Celestial Wonders Collection</h2>
+      <p>
+        Gems and pieces inspired by the night sky, stars, moon, and galaxies,
+        evoking mystery and elegance. Discover a universe of radiant beauty that
+        speaks to your cosmic soul.
+      </p>
+      <a href="#" class="cta-button">Discover More</a>
+    </div>
+    <div class="celestial-image">
+      <img src="bg9.jpg" alt="Celestial Wonders Jewelry" />
+    </div>
+  </section>
+  <section class="featured">
+    <div class="featured-content">
+      <div class="featured-text">
+        <h2>Craftsmanship Excellence</h2>
+        <p>
+          Every piece in our collection represents the pinnacle of jewelry
+          craftsmanship. From the selection of the finest gemstones to the
+          meticulous attention to detail in every setting, our artisans create
+          timeless pieces that transcend generations.
+        </p>
+        <a href="login.html" class="cta-button">Discover More</a>
+      </div>
+      <div class="featured-image">
+        <img src="craft.jpg" alt="Craftsmanship" />
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="#">Care Instructions</a></li>
+          <li><a href="#">After Sales Services</a></li>
+          <li><a href="#">Digital Warranties</a></li>
+          <li><a href="#">Book an Appointment</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="#">Send a Message</a></li>
+          <li><a href="#">Book a Virtual Appointment</a></li>
+          <li><a href="#">Find a Store</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>About Bejeweled</h3>
+        <ul>
+          <li><a href="#">Our Commitment</a></li>
+          <li><a href="#">Ethics & Compliance</a></li>
+          <li><a href="#">People and Careers</a></li>
+          <li><a href="#">Brand Protection</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Privacy Center</h3>
+        <ul>
+          <li><a href="#">Cookie Settings</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Bejeweled. All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
