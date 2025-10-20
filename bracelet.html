@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bracelets - BEJEWELED</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: #000;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .header-left a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .header-left a:hover {
+            color: #d4af37;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .header-right a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .header-right a:hover {
+            color: #d4af37;
+        }
+
+        /* NAVIGATION */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 20px 0;
+            background: #000;
+            border-bottom: 1px solid #333;
+        }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navigation a:hover {
+            color: #d4af37;
+        }
+
+        .navigation a.active {
+            color: #d4af37;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            text-align: right;
+            max-width: 500px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* CATEGORY NAVIGATION */
+        .category-nav {
+            padding: 40px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .category-nav input[type="radio"] {
+            display: none;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #333;
+            padding: 12px 30px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 15px;
+            border-radius: 5px;
+        }
+
+        .category-btn:hover {
+            background: #d4af37;
+            color: #fff;
+        }
+
+        /* Active state */
+        #show-all:checked~.category-nav label[for="show-all"],
+        #show-tennis:checked~.category-nav label[for="show-tennis"],
+        #show-chain:checked~.category-nav label[for="show-chain"],
+        #show-charm:checked~.category-nav label[for="show-charm"],
+        #show-bangle:checked~.category-nav label[for="show-bangle"],
+        #show-cuff:checked~.category-nav label[for="show-cuff"] {
+            background: #d4af37;
+            color: #fff;
+        }
+
+        /* PRODUCT SECTIONS */
+        .category-section {
+            display: none;
+            padding: 60px 40px;
+            background: #f5f5f5;
+        }
+
+        .all-products-section {
+            display: none;
+            padding: 60px 40px;
+            background: #f5f5f5;
+        }
+
+        /* Show sections based on radio */
+        #show-all:checked~.products-container .all-products-section {
+            display: block;
+        }
+
+        #show-tennis:checked~.products-container #tennis-section {
+            display: block;
+        }
+
+        #show-chain:checked~.products-container #chain-section {
+            display: block;
+        }
+
+        #show-charm:checked~.products-container #charm-section {
+            display: block;
+        }
+
+        #show-bangle:checked~.products-container #bangle-section {
+            display: block;
+        }
+
+        #show-cuff:checked~.products-container #cuff-section {
+            display: block;
+        }
+
+        /* SECTION TITLE ON LEFT SIDE */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #333;
+            margin: 0;
+        }
+
+        /* PRODUCT GRID - 4 COLUMNS LIKE RINGS.HTML */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* PRODUCT CARD - WHITE BACKGROUND LIKE RINGS.HTML */
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-info {
+            text-align: center;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            color: #2c3e50;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #d4af37;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        /* ADD TO CART BUTTON - GOLD LIKE RINGS.HTML */
+        .add-to-cart {
+            background: #d4af37;
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .add-to-cart:hover {
+            background: #b8941f;
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #000;
+            border-top: 1px solid #333;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .category-btn {
+                margin: 5px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-left">
+            <a href="store.html">Find a Store</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <a href="bulgari-style-homepage.html" class="logo">BEJEWELED</a>
+
+        <div class="header-right">
+            
+            <a href="login.html">My Account</a>
+            <a href="cart-b.html">Shopping Bag (0)</a>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="navigation">
+        <a href="bulgari-style-homepage.html">Home</a>
+        <a href="n.html">Necklaces</a>
+        <a href="bulgari-bracelets-new.html" class="active">Bracelets</a>
+        <a href="r.html">Rings</a>
+        <a href="bulgari-earring.html">Earrings</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <img src="assets/B/bg-b.jpg" alt="Luxury Bracelet Collection" />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Bracelets</h1>
+            <p class="hero-subtitle">Discover our exquisite collection of bracelets, from delicate tennis styles to bold
+                statement pieces. Each bracelet is crafted with precision and adorned with the finest materials.</p>
+        </div>
+    </section>
+
+    <!-- RADIO BUTTONS FOR FILTERING -->
+    <input type="radio" id="show-all" name="category" checked>
+    <input type="radio" id="show-tennis" name="category">
+    <input type="radio" id="show-chain" name="category">
+    <input type="radio" id="show-charm" name="category">
+    <input type="radio" id="show-bangle" name="category">
+    <input type="radio" id="show-cuff" name="category">
+
+    <!-- CATEGORY NAVIGATION -->
+    <div class="category-nav">
+        <label for="show-all" class="category-btn">All</label>
+        <label for="show-tennis" class="category-btn">Tennis</label>
+        <label for="show-chain" class="category-btn">Chain Bracelet</label>
+        <label for="show-charm" class="category-btn">Charm</label>
+        <label for="show-bangle" class="category-btn">Bangle</label>
+        <label for="show-cuff" class="category-btn">Cuff</label>
+    </div>
+
+    <!-- PRODUCTS CONTAINER -->
+    <div class="products-container">
+
+        <!-- ALL PRODUCTS SECTION -->
+        <section class="all-products-section">
+            <div class="section-header">
+                <h2 class="category-title">All Bracelets</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Tennis Bracelets -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b1.jpg" alt="Diamond Tennis Classic" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Tennis Classic</h3>
+                        <p class="product-price">$1,200</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b2.jpg" alt="Emerald Tennis Luxury" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Emerald Tennis Luxury</h3>
+                        <p class="product-price">$1,450</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b3.jpg" alt="Sapphire Tennis Elite" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sapphire Tennis Elite</h3>
+                        <p class="product-price">$1,350</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b4.jpg" alt="Ruby Tennis Radiance" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ruby Tennis Radiance</h3>
+                        <p class="product-price">$1,500</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b5.jpg" alt="Mixed Gemstone Tennis" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Mixed Gemstone Tennis</h3>
+                        <p class="product-price">$1,650</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b6.jpg" alt="White Gold Tennis" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">White Gold Tennis</h3>
+                        <p class="product-price">$1,100</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b7.jpg" alt="Rose Gold Tennis" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rose Gold Tennis</h3>
+                        <p class="product-price">$1,250</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b8.jpg" alt="Platinum Tennis Premium" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Platinum Tennis Premium</h3>
+                        <p class="product-price">$1,800</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+
+                <!-- Chain Bracelets -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c1.jpg" alt="Gold Cuban Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Gold Cuban Chain</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c2.jpg" alt="Silver Figaro Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Silver Figaro Chain</h3>
+                        <p class="product-price">$180</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c3.jpg" alt="Rose Gold Rope Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rose Gold Rope Chain</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c4.jpg" alt="Herringbone Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Herringbone Chain</h3>
+                        <p class="product-price">$240</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c5.jpg" alt="Box Chain Delicate" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Box Chain Delicate</h3>
+                        <p class="product-price">$150</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c6.jpg" alt="Snake Chain Modern" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Snake Chain Modern</h3>
+                        <p class="product-price">$200</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c7.jpg" alt="Wheat Chain Classic" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Wheat Chain Classic</h3>
+                        <p class="product-price">$220</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c8.jpg" alt="Curb Chain Bold" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Curb Chain Bold</h3>
+                        <p class="product-price">$350</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+
+                <!-- Charm Bracelets -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch1.jpg" alt="Heart Charm Collection" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Heart Charm Collection</h3>
+                        <p class="product-price">$195</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch2.jpg" alt="Travel Charm Bracelet" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Travel Charm Bracelet</h3>
+                        <p class="product-price">$245</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch3.jpg" alt="Animal Charm Set" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Animal Charm Set</h3>
+                        <p class="product-price">$165</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/che.jpg" alt="Birthstone Charm" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Birthstone Charm</h3>
+                        <p class="product-price">$210</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch5.jpg" alt="Vintage Charm Collection" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Vintage Charm Collection</h3>
+                        <p class="product-price">$285</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch6.jpg" alt="Floral Charm Bracelet" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Floral Charm Bracelet</h3>
+                        <p class="product-price">$175</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch7.jpg" alt="Celestial Charm Set" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Celestial Charm Set</h3>
+                        <p class="product-price">$225</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch8.jpg" alt="Custom Charm Bracelet" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Custom Charm Bracelet</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+
+                <!-- Bangle Bracelets -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba1.jpg" alt="Gold Smooth Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Gold Smooth Bangle</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba2.jpg" alt="Silver Textured Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Silver Textured Bangle</h3>
+                        <p class="product-price">$160</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba3.jpg" alt="Rose Gold Twisted Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rose Gold Twisted Bangle</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba4.jpg" alt="Diamond Eternity Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Eternity Bangle</h3>
+                        <p class="product-price">$850</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba5.jpg" alt="Hinged Bangle Classic" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hinged Bangle Classic</h3>
+                        <p class="product-price">$240</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba6.jpg" alt="Cuff Bangle Modern" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Cuff Bangle Modern</h3>
+                        <p class="product-price">$290</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba7.jpg" alt="Engraved Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Engraved Bangle</h3>
+                        <p class="product-price">$210</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba8.jpg" alt="Stackable Bangle Set" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Stackable Bangle Set</h3>
+                        <p class="product-price">$380</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+
+                <!-- Cuff Bracelets -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu1.jpg" alt="Wide Gold Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Wide Gold Cuff</h3>
+                        <p class="product-price">$420</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu2.jpg" alt="Silver Hammered Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Silver Hammered Cuff</h3>
+                        <p class="product-price">$260</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu3.jpg" alt="Rose Gold Open Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rose Gold Open Cuff</h3>
+                        <p class="product-price">$340</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu4.jpg" alt="Diamond Cuff Luxury" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Cuff Luxury</h3>
+                        <p class="product-price">$950</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu5.jpg" alt="Geometric Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Geometric Cuff</h3>
+                        <p class="product-price">$310</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu6.jpg" alt="Twisted Metal Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Twisted Metal Cuff</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu7.jpg" alt="Minimalist Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Minimalist Cuff</h3>
+                        <p class="product-price">$190</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu8.jpg" alt="Statement Cuff Bold" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Statement Cuff Bold</h3>
+                        <p class="product-price">$520</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TENNIS BRACELETS SECTION -->
+        <section id="tennis-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Tennis Bracelets</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b1.jpg" alt="Diamond Tennis Classic" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Tennis Classic</h3>
+                        <p class="product-price">$1,200</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b2.jpg" alt="Emerald Tennis Luxury" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Emerald Tennis Luxury</h3>
+                        <p class="product-price">$1,450</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b3.jpg" alt="Sapphire Tennis Elite" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sapphire Tennis Elite</h3>
+                        <p class="product-price">$1,350</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b4.jpg" alt="Ruby Tennis Radiance" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ruby Tennis Radiance</h3>
+                        <p class="product-price">$1,500</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b5.jpg" alt="Mixed Gemstone Tennis" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Mixed Gemstone Tennis</h3>
+                        <p class="product-price">$1,650</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b6.jpg" alt="White Gold Tennis" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">White Gold Tennis</h3>
+                        <p class="product-price">$1,100</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b7.jpg" alt="Rose Gold Tennis" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rose Gold Tennis</h3>
+                        <p class="product-price">$1,250</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/b8.jpg" alt="Platinum Tennis Premium" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Platinum Tennis Premium</h3>
+                        <p class="product-price">$1,800</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAIN BRACELETS SECTION -->
+        <section id="chain-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Chain Bracelets</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c1.jpg" alt="Gold Cuban Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Gold Cuban Chain</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c2.jpg" alt="Silver Figaro Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Silver Figaro Chain</h3>
+                        <p class="product-price">$180</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c3.jpg" alt="Rose Gold Rope Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rose Gold Rope Chain</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c4.jpg" alt="Herringbone Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Herringbone Chain</h3>
+                        <p class="product-price">$240</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c5.jpg" alt="Box Chain Delicate" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Box Chain Delicate</h3>
+                        <p class="product-price">$150</p>
+                        <button class="cart-b">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c6.jpg" alt="Snake Chain Modern" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Snake Chain Modern</h3>
+                        <p class="product-price">$200</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c7.jpg" alt="Wheat Chain Classic" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Wheat Chain Classic</h3>
+                        <p class="product-price">$220</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/c8.jpg" alt="Curb Chain Bold" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Curb Chain Bold</h3>
+                        <p class="product-price">$350</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHARM BRACELETS SECTION -->
+        <section id="charm-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Charm Bracelets</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch1.jpg" alt="Heart Charm Collection" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Heart Charm Collection</h3>
+                        <p class="product-price">$195</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch2.jpg" alt="Travel Charm Bracelet" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Travel Charm Bracelet</h3>
+                        <p class="product-price">$245</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch3.jpg" alt="Animal Charm Set" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Animal Charm Set</h3>
+                        <p class="product-price">$165</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/che.jpg" alt="Birthstone Charm" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Birthstone Charm</h3>
+                        <p class="product-price">$210</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch5.jpg" alt="Vintage Charm Collection" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Vintage Charm Collection</h3>
+                        <p class="product-price">$285</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch6.jpg" alt="Floral Charm Bracelet" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Floral Charm Bracelet</h3>
+                        <p class="product-price">$175</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch7.jpg" alt="Celestial Charm Set" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Celestial Charm Set</h3>
+                        <p class="product-price">$225</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ch8.jpg" alt="Custom Charm Bracelet" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Custom Charm Bracelet</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BANGLE BRACELETS SECTION -->
+        <section id="bangle-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Bangle Bracelets</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba1.jpg" alt="Gold Smooth Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Gold Smooth Bangle</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba2.jpg" alt="Silver Textured Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Silver Textured Bangle</h3>
+                        <p class="product-price">$160</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba3.jpg" alt="Rose Gold Twisted Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rose Gold Twisted Bangle</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba4.jpg" alt="Diamond Eternity Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Eternity Bangle</h3>
+                        <p class="product-price">$850</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba5.jpg" alt="Hinged Bangle Classic" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hinged Bangle Classic</h3>
+                        <p class="product-price">$240</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba6.jpg" alt="Cuff Bangle Modern" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Cuff Bangle Modern</h3>
+                        <p class="product-price">$290</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba7.jpg" alt="Engraved Bangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Engraved Bangle</h3>
+                        <p class="product-price">$210</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/ba8.jpg" alt="Stackable Bangle Set" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Stackable Bangle Set</h3>
+                        <p class="product-price">$380</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CUFF BRACELETS SECTION -->
+        <section id="cuff-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Cuff Bracelets</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu1.jpg" alt="Wide Gold Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Wide Gold Cuff</h3>
+                        <p class="product-price">$420</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu2.jpg" alt="Silver Hammered Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Silver Hammered Cuff</h3>
+                        <p class="product-price">$260</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu3.jpg" alt="Rose Gold Open Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rose Gold Open Cuff</h3>
+                        <p class="product-price">$340</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu4.jpg" alt="Diamond Cuff Luxury" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Cuff Luxury</h3>
+                        <p class="product-price">$950</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu5.jpg" alt="Geometric Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Geometric Cuff</h3>
+                        <p class="product-price">$310</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu6.jpg" alt="Twisted Metal Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Twisted Metal Cuff</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu7.jpg" alt="Minimalist Cuff" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Minimalist Cuff</h3>
+                        <p class="product-price">$190</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/B/cu8.jpg" alt="Statement Cuff Bold" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Statement Cuff Bold</h3>
+                        <p class="product-price">$520</p>
+                        <a href="cart-b.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About BEJEWELED</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Craftsmanship</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Collections</h3>
+                <ul>
+                    <li><a href="#">High Jewellery</a></li>
+                    <li><a href="#">Bracelets</a></li>
+                    <li><a href="#">Earrings</a></li>
+                    <li><a href="#">Necklaces</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BEJEWELED. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
