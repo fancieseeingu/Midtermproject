@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BEJEWELED Store Locator</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --primary-blue: #00215E;
+    --accent-yellow: #FFC55A;
+    --text-dark: #1A1A1A;
+    --text-light: #fff;
+    --section-gray: #f5f5f5;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+  .top-banner {
+    background: #001947e3;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eee;
+    color: var(--accent-yellow);
+    font-family: 'Playfair Display', serif;
+  }
+  .banner-text {
+    color: var(--accent-yellow);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: var(--section-gray);
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .header-left, .header-right {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  .header-left a, .header-right a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+  .header-left a:hover, .header-right a:hover {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 8px;
+    color: var(--primary-blue);
+    text-decoration: none;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 20px 0;
+    background: var(--section-gray);
+    border-bottom: 1px solid #eee;
+  }
+  .navigation a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.19s;
+    position: relative;
+    border-bottom: 2px solid transparent;
+  }
+  .navigation a:hover {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+  }
+  .store-locator {
+    background: white;
+    padding: 2rem;
+    color: var(--primary-blue);
+    font-family: 'Playfair Display', serif;
+  }
+  .map-container {
+    position: relative;
+    height: 300px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1200px-World_map_-_low_resolution.svg.png') no-repeat center;
+    background-size: cover;
+    border: 2px solid #ddd;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .pin {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: var(--accent-yellow);
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 5px rgba(255, 197, 90, 0.6);
+  }
+  .pin::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.6; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  }
+  .abu-dhabi { top: 55%; left: 65%; }
+  .almaty { top: 45%; left: 75%; }
+  .tokyo { top: 40%; left: 85%; }
+  .new-york { top: 35%; left: 25%; }
+  .paris { top: 40%; left: 45%; }
+  .search-bar {
+    margin-bottom: 1rem;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .store {
+    border-top: 1px solid #eee;
+    padding: 1rem 0;
+    color: var(--primary-blue);
+    font-family: 'Playfair Display', serif;
+    
+  }
+  .store h3 {
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+  }
+  .store p {
+    margin: 0.3rem 0;
+    color: var(--primary-blue);
+  }
+  .store a {
+    color: var(--primary-blue);
+    text-decoration: none;
+  }
+  .store a:hover {
+    color: var(--accent-yellow);
+    text-decoration: underline;
+  }
+  .phone-icon {
+    vertical-align: middle;
+    margin-right: 8px;
+    fill: var(--primary-blue);
+  }
+  .back-arrow {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 1.5rem;
+    color: white;
+    background: #444;
+    padding: 0.4rem 0.6rem;
+    border-radius: 50%;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 1000;
+    transition: background 0.3s;
+  }
+  .back-arrow:hover {
+    background: #666;
+  }
+  .footer {
+    background: var(--section-gray);
+    border-top: 1px solid #eee;
+    padding: 60px 40px 30px;
+    color: var(--primary-blue);
+  }
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+  }
+  .footer-section h3{
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+  }
+  .footer-section ul {
+    list-style: none;
+  }
+  .footer-section ul li {
+    margin-bottom: 12px;
+  }
+  .footer-section ul li a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+  }
+  .footer-section ul li a:hover {
+    color: var(--accent-yellow);
+  }
+  .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    color: #003392;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+  <a href="main.html" class="back-arrow" title="Back">&#8592;</a>
+  <div class="top-banner">
+    <span class="banner-text">Experience magnificent craftsmanship and luxury with the new collection</span>
+  </div>
+  <header class="header">
+    <div class="header-left">
+      <a href="#">Find a Store</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <a href="#" class="logo">BEJEWELED</a>
+    <div class="header-right">
+      <a href="login.html">My Account</a>
+      <a href="#">Shopping Cart (0)</a>
+    </div>
+  </header>
+  <nav class="navigation">
+    <a href="n.html">Necklace</a>
+    <a href="r.html">Bracelet</a>
+    <a href="e.html">Rings</a>
+    <a href="#">Earrings</a>
+    <a href="#">Watches</a>
+  </nav>
+  <main class="store-locator">
+    <div class="map-container">
+      <div class="pin abu-dhabi" title="Abu Dhabi"></div>
+      <div class="pin almaty" title="Almaty"></div>
+      <div class="pin tokyo" title="Tokyo"></div>
+      <div class="pin new-york" title="New York"></div>
+      <div class="pin paris" title="Paris"></div>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Country/Region, state, city, street" />
+    </div>
+    <div class="store">
+      <h3>BEJEWELED ABU DHABI</h3>
+      <p><strong>BOUTIQUE</strong> — Open Now - Closes at 10:00 PM</p>
+      <p>The Galleria at Al Maryah Island, Ground Floor</p>
+      <p>Abu Dhabi, United Arab Emirates</p>
+      <p>
+        <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 512 512">
+          <path d="M391 351c-13-13-26-26-39-39-11-11-28-11-39 0l-27 27c-38-20-70-52-90-90l27-27c11-11 11-28 0-39-13-13-26-26-39-39-11-11-28-11-39 0l-27 27c-11 11-17 26-17 42 0 8 1 16 3 24 28 94 106 172 200 200 8 2 16 3 24 3 16 0 31-6 42-17l27-27c11-11 11-28 0-39z" />
+        </svg>
+        +971 2 679 7818
+      </p>
+      <p>
+        <a href="https://maps.google.com" target="_blank">Get directions from Google Maps</a>
+      </p>
+    </div>
+    <div class="store">
+      <h3>BEJEWELED ALMATY</h3>
+      <p><strong>BOUTIQUE</strong></p>
+      <p>Al-Farabi 71/1B, Esentai Mall, 050040 Almaty Kazakhstan</p>
+      <p>Almaty 050040</p>
+    </div>
+    <div class="store">
+      <h3>BEJEWELED TOKYO</h3>
+      <p><strong>BOUTIQUE</strong></p>
+      <p>Ginza Tower, Chuo City, Tokyo, Japan</p>
+      <p>
+        <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 512 512">
+          <path d="M391 351c-13-13-26-26-39-39-11-11-28-11-39 0l-27 27c-38-20-70-52-90-90l27-27c11-11 11-28 0-39-13-13-26-26-39-39-11-11-28-11-39 0l-27 27c-11 11-17 26-17 42 0 8 1 16 3 24 28 94 106 172 200 200 8 2 16 3 24 3 16 0 31-6 42-17l27-27c11-11 11-28 0-39z" />
+        </svg>
+        +81 3 1234 5678
+      </p>
+    </div>
+    <div class="store">
+      <h3>BEJEWELED NEW YORK</h3>
+      <p><strong>BOUTIQUE</strong></p>
+      <p>730 Fifth Avenue, New York, NY 10019, USA</p>
+      <p>
+        <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 512 512">
+          <path d="M391 351c-13-13-26-26-39-39-11-11-28-11-39 0l-27 27c-38-20-70-52-90-90l27-27c11-11 11-28 0-39-13-13-26-26-39-39-11-11-28-11-39 0l-27 27c-11 11-17 26-17 42 0 8 1 16 3 24 28 94 106 172 200 200 8 2 16 3 24 3 16 0 31-6 42-17l27-27c11-11 11-28 0-39z" />
+        </svg>
+        +1 212 555 1234
+      </p>
+    </div>
+    <div class="store">
+      <h3>BEJEWELED PARIS</h3>
+      <p><strong>BOUTIQUE</strong></p>
+      <p>Place Vendôme, 75001 Paris, France</p>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="#">Care Instructions</a></li>
+          <li><a href="#">After Sales Services</a></li>
+          <li><a href="#">Digital Warranties</a></li>
+          <li><a href="#">Book an Appointment</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="#">Send a Message</a></li>
+          <li><a href="#">Book a Virtual Appointment</a></li>
+          <li><a href="#">Find a Store</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>About Bejeweled</h3>
+        <ul>
+          <li><a href="#">Our Commitment</a></li>
+          <li><a href="#">Ethics & Compliance</a></li>
+          <li><a href="#">People and Careers</a></li>
+          <li><a href="#">Brand Protection</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Privacy Center</h3>
+        <ul>
+          <li><a href="#">Cookie Settings</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Bejeweled. All Rights Reserved.</div>
+  </footer>
+</body>
+</html>
+fonts.googleapis.com
