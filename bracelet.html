@@ -9,6 +9,13 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <style>
+        :root {
+          --primary-blue: #00215E;
+          --accent-yellow: #FFC55A;
+          --text-dark: #1A1A1A;
+          --text-light: #fff;
+          --section-gray: #f5f5f5;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -17,10 +24,38 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            background: #fff;
+            color: #fff;
+            color: var(--text-dark);
             overflow-x: hidden;
         }
+        .top-banner {
+            background: #001947e3;
+            padding: 12px 0;
+            text-align: center;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #eee;
+            color: var(--accent-yellow);
+            font-family: 'Playfair Display', serif;
+        }
+        .banner-text{
+            color: var(--accent-yellow);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;    
+            background: var(--section-gray);
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+      }
+            
 
         /* HEADER */
         .header {
@@ -28,31 +63,29 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: #000;
+            background: var(--section-gray);
             border-bottom: 1px solid #333;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .header-left {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .header-left a {
-            color: #fff;
+        .header-left a,
+        .header-right a{
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 12px;
             font-weight: 400;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
         }
 
-        .header-left a:hover {
-            color: #d4af37;
+        .header-left a:hover,
+        .header-right a:hover{
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
         }
 
         .logo {
@@ -60,29 +93,16 @@
             font-size: 32px;
             font-weight: 300;
             letter-spacing: 8px;
-            color: #fff;
+            color:var(--primary-blue);
             text-decoration: none;
         }
-
+        .header-left,
         .header-right {
             display: flex;
-            gap: 25px;
+            gap: 30px;
             align-items: center;
         }
-
-        .header-right a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-
-        .header-right a:hover {
-            color: #d4af37;
-        }
+       
 
         /* NAVIGATION */
         .navigation {
@@ -90,23 +110,25 @@
             justify-content: center;
             gap: 60px;
             padding: 20px 0;
-            background: #000;
-            border-bottom: 1px solid #333;
+            background: var(--section-gray);
+            border-bottom: 1px solid #eee;
         }
 
         .navigation a {
-            color: #fff;
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: color 0.19s;
             position: relative;
+            border-bottom: 2px solid transparent;
         }
 
         .navigation a:hover {
-            color: #d4af37;
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
         }
 
         .navigation a.active {
@@ -118,7 +140,7 @@
             position: relative;
             height: 60vh;
             overflow: hidden;
-            background: #000;
+            background: #fff;
         }
 
         .hero img {
@@ -143,6 +165,7 @@
             transform: translateY(-50%);
             text-align: right;
             max-width: 500px;
+            color: white;
         }
 
         .hero-title {
@@ -352,9 +375,10 @@
 
         /* FOOTER */
         .footer {
-            background: #000;
-            border-top: 1px solid #333;
+            background: var(--section-gray);
+            border-top: 1px solid #eee;
             padding: 60px 40px 30px;
+            color: var(--primary-blue);
         }
 
         .footer-content {
@@ -371,7 +395,7 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 20px;
-            color: #fff;
+            color: var(--primary-blue);
         }
 
         .footer-section ul {
@@ -383,22 +407,22 @@
         }
 
         .footer-section ul li a {
-            color: #ccc;
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 13px;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
 
         .footer-section ul li a:hover {
-            color: #d4af37;
+            color: var(--accent-yellow);
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid #333;
+            border-top: 1px solid #eee;
             margin-top: 40px;
-            color: #666;
+            color: #003392;
             font-size: 12px;
         }
 
@@ -434,6 +458,9 @@
 </head>
 
 <body>
+  <div class="top-banner">
+    <span class="banner-text">Experience magnificent craftsmanship and luxury with the new collection</span>
+  </div>
     <!-- HEADER -->
     <header class="header">
         <div class="header-left">
