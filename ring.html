@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +10,13 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <style>
+        :root{
+            --primary-blue: #00215E;
+            --accent-yellow: #FFC55A;
+            --text-dark: #1A1A1A;
+            --text-light: #fff;
+            --section-gray: #f5f5f5;
+            
         * {
             margin: 0;
             padding: 0;
@@ -18,9 +26,24 @@
         body {
             font-family: 'Inter', sans-serif;
             background: #000;
-            color: #fff;
+            color: var(--text-dark);
             overflow-x: hidden;
         }
+            .top-banner {
+            background: #001947e3;
+            padding: 12px 0;
+            text-align: center;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #eee;
+            color: var(--accent-yellow);
+            font-family: 'Playfair Display', serif;
+        }
+          .banner-text {
+           color: var(--accent-yellow);
+           text-decoration: underline;
+           cursor: pointer;
+          }
 
         /* HEADER */
         .header {
@@ -28,61 +51,47 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: #000;
-            border-bottom: 1px solid #333;
+            background: var(--section-gray);
+            border-bottom: 1px solid #eee;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
+            .header-left,
+            .header-right {
+             display: flex;
+             gap: 30px;
+             align-items: center;
 
-        .header-left {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
+            }
 
-        .header-left a {
-            color: #fff;
+         .header-left a,
+         .header-right a {
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 12px;
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-
-        .header-left a:hover {
-            color: #d4af37;
-        }
+           transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+  }
+  .header-left a:hover,
+  .header-right a:hover {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+  }
 
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
             font-weight: 300;
             letter-spacing: 8px;
-            color: #fff;
+            color: var(--primary-blue);
             text-decoration: none;
         }
 
-        .header-right {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .header-right a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-
-        .header-right a:hover {
-            color: #d4af37;
-        }
+        
 
         /* NAVIGATION */
         .navigation {
@@ -90,23 +99,25 @@
             justify-content: center;
             gap: 60px;
             padding: 20px 0;
-            background: #000;
-            border-bottom: 1px solid #333;
+            background:var(--section-gray);
+            border-bottom: 1px solid #eee;
         }
 
         .navigation a {
-            color: #fff;
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: color 0.19s;
             position: relative;
+            border-bottom: 2px solid transparent;
         }
 
         .navigation a:hover {
-            color: #d4af37;
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
         }
 
         .navigation a.active {
@@ -1477,5 +1488,6 @@
         </div>
     </footer>
 </body>
+
 
 </html>
