@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Bejeweled Style</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-blue: #00215E;
+      --accent-yellow: #FFC55A;
+      --text-dark: #1A1A1A;
+      --text-light: #fff;
+      --section-gray: #f5f5f5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    .top-banner {
+      background: #001947e3;
+      padding: 12px 0;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid #eee;
+      color: var(--accent-yellow);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .banner-text {
+      color: var(--accent-yellow);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: var(--section-gray);
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .header-left a, .header-right a {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+
+    .header-left a:hover, .header-right a:hover {
+      color: var(--accent-yellow);
+      border-bottom: 2px solid var(--accent-yellow);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: 8px;
+      color: var(--primary-blue);
+      text-decoration: none;
+    }
+
+    /* NAVIGATION */
+    .navigation {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      padding: 20px 0;
+      background: var(--section-gray);
+      border-bottom: 1px solid #eee;
+    }
+
+    .navigation a {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.19s;
+      position: relative;
+      border-bottom: 2px solid transparent;
+    }
+
+    .navigation a:hover {
+      color: var(--accent-yellow);
+      border-bottom: 2px solid var(--accent-yellow);
+    }
+
+    /* CONTACT GRID */
+    .contact-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .contact-container h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--primary-blue);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .contact-card {
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .contact-card i {
+      font-size: 1.8rem;
+      color: var(--text-light);
+      background-color: var(--primary-blue);
+      padding: 0.8rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .contact-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-blue);
+    }
+
+    .contact-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* FAQ Section */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #eee;
+      padding: 1rem 0;
+    }
+
+    .faq-item summary {
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      list-style: none;
+      color: var(--primary-blue);
+    }
+
+    .faq-item p {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .read-all-btn {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.8rem 2rem;
+      background-color: var(--accent-yellow);
+      color: var(--primary-blue);
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .read-all-btn:hover {
+      background-color: #e0aa3e;
+    }
+
+    .scroll-top-icon {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      font-size: 1.5rem;
+      color: #fff;
+      background-color: var(--primary-blue);
+      border-radius: 50%;
+      padding: 0.6rem;
+      cursor: pointer;
+      z-index: 1000;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .scroll-top-icon:hover {
+      background-color: #00133b;
+      transform: scale(1.1);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--section-gray);
+      border-top: 1px solid #eee;
+      padding: 60px 40px 30px;
+      color: var(--primary-blue);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-section h3 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: var(--primary-blue);
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section ul li a {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: var(--accent-yellow);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid #eee;
+      margin-top: 40px;
+      color: #003392;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="top-banner">
+    <span class="banner-text">Experience magnificent craftsmanship and luxury with the new collection</span>
+  </div>
+
+  <header class="header">
+    <div class="header-left">
+      <a href="store.html">Find a Store</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <a href="main.html" class="logo">BEJEWELED</a>
+    <div class="header-right">
+      <a href="login.html">My Account</a>
+      <a href="#">Shopping Cart (0)</a>
+    </div>
+  </header>
+
+  <nav class="navigation">
+    <a href="n.html">Necklace</a>
+    <a href="r.html">Bracelet</a>
+    <a href="e.html">Rings</a>
+    <a href="#">Earrings</a>
+    <a href="#">Watches</a>
+  </nav>
+
+  <!-- Scroll-to-top Icon -->
+  <a href="#top"><i class="fas fa-arrow-up scroll-top-icon"></i></a>
+
+  <!-- Contact Section -->
+  <section class="contact-container" id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <i class="fas fa-headset"></i>
+        <h3>Contact us</h3>
+        <p>Send us a message and ask to be contacted.</p>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-store"></i>
+        <h3>Book an in-person appointment</h3>
+        <p>Visit a Bejeweled Boutique for a personalized experience.</p>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-laptop"></i>
+        <h3>Book a virtual appointment</h3>
+        <p>Shop with Bejeweled remotely from anywhere.</p>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <h3>Email us</h3>
+        <p>Our ambassadors will respond via email.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Topics Section -->
+  <section class="contact-container">
+    <h2>Are you searching for a specific topic?</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <i class="fas fa-truck"></i>
+        <h3>Shipping</h3>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-file-invoice"></i>
+        <h3>Order Information</h3>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-pen-nib"></i>
+        <h3>Engraving</h3>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-stamp"></i>
+        <h3>Hot Stamping</h3>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-gem"></i>
+        <h3>How to Wear Jewelry</h3>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-ruler"></i>
+        <h3>Find Your Jewelry Size</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="contact-container">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <details class="faq-item">
+        <summary>How can I place an order online?</summary>
+        <p>You can place an order by browsing our catalog, selecting your items, and checking out securely.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What shipping options are available on Bejeweled.com?</summary>
+        <p>We offer standard and express shipping options depending on your location.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I modify or cancel an order?</summary>
+        <p>Yes, you can modify or cancel your order within a limited time after placing it. Contact customer service for help.</p>
+      </details>
+      <button class="read-all-btn">READ ALL</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="#">Care Instructions</a></li>
+          <li><a href="#">After Sales Services</a></li>
+          <li><a href="#">Digital Warranties</a></li>
+          <li><a href="#">Book an Appointment</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="#">Send a Message</a></li>
+          <li><a href="#">Book a Virtual Appointment</a></li>
+          <li><a href="#">Find a Store</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>About Bejeweled</h3>
+        <ul>
+          <li><a href="#">Our Commitment</a></li>
+          <li><a href="#">Ethics & Compliance</a></li>
+          <li><a href="#">People and Careers</a></li>
+          <li><a href="#">Brand Protection</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Privacy Center</h3>
+        <ul>
+          <li><a href="#">Cookie Settings</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Bejeweled. All Rights Reserved.</div>
+  </footer>
+
+</body>
+</html>
