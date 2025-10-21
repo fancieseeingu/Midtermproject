@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bracelets - BEJEWELED</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: #000;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .header-left a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .header-left a:hover {
+            color: #d4af37;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .header-right a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .header-right a:hover {
+            color: #d4af37;
+        }
+
+        /* NAVIGATION */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 20px 0;
+            background: #001947e3;
+            border-bottom: 1px solid #333;
+        }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navigation a:hover {
+            color: #d4af37;
+        }
+
+        .navigation a.active {
+            color: #d4af37;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+            background: #001947e3;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            text-align: right;
+            max-width: 500px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* CATEGORY NAVIGATION */
+        .category-nav {
+            padding: 40px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .category-nav input[type="radio"] {
+            display: none;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #333;
+            padding: 12px 30px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 15px;
+            border-radius: 5px;
+        }
+
+        .category-btn:hover {
+            background: #d4af37;
+            color: #fff;
+        }
+
+        /* Active state */
+        #show-all:checked~.category-nav label[for="show-all"],
+        #show-pendant:checked~.category-nav label[for="show-pendant"],
+        #show-chain:checked~.category-nav label[for="show-chain"],
+        #show-choker:checked~.category-nav label[for="show-choker"],
+        #show-statement:checked~.category-nav label[for="show-statement"],
+        #show-lariat:checked~.category-nav label[for="show-lariat"] {
+            background: ##FFC55A;
+            color: #fff;
+        }
+
+        /* PRODUCT SECTIONS */
+        .category-section {
+            display: none;
+            padding: 60px 40px;
+            background: #f5f5f5;
+        }
+
+        .all-products-section {
+            display: none;
+            padding: 60px 40px;
+            background: #f5f5f5;
+        }
+
+        /* Show sections based on radio */
+        #show-all:checked~.products-container .all-products-section {
+            display: block;
+        }
+
+        #show-pendant:checked~.products-container #pendant-section {
+            display: block;
+        }
+
+        #show-chain:checked~.products-container #chain-section {
+            display: block;
+        }
+
+        #show-choker:checked~.products-container #choker-section {
+            display: block;
+        }
+
+        #show-statement:checked~.products-container #statement-section {
+            display: block;
+        }
+
+        #show-lariat:checked~.products-container #lariat-section {
+            display: block;
+        }
+
+        /* SECTION TITLE ON LEFT SIDE */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid ##FFC55A;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #333;
+            margin: 0;
+        }
+
+        /* PRODUCT GRID - 4 COLUMNS LIKE RINGS.HTML */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* PRODUCT CARD - WHITE BACKGROUND LIKE RINGS.HTML */
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-info {
+            text-align: center;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            color: #001947e3;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: ##FFC55A;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        /* ADD TO CART BUTTON - GOLD LIKE RINGS.HTML */
+        .add-to-cart {
+            background: #FFC55A;
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .add-to-cart:hover {
+            background: #b8941f;
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #001947e3;
+            border-top: 1px solid #333;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .category-btn {
+                margin: 5px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-left">
+            <a href="#">Find a Store</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <a href="bulgari-style-homepage.html" class="logo">BEJEWELED</a>
+
+        <div class="header-right">
+            <a href="bulgari-login.html">My Account</a>
+            <a href="#">Shopping Bag (0)</a>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="navigation">
+        <a href="bulgari-style-homepage.html">Home</a>
+        <a href="n.html"class="active">Necklaces</a>
+        <a href="bulgari-bracelets-new.html">Bracelets</a>
+        <a href="r.html">Rings</a>
+        <a href="bulgari-earring.html">Earrings</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <img src="assets/B/bg-b.jpg" alt="Luxury Bracelet Collection" />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Necklace</h1>
+            <p class="hero-subtitle">Explore our stunning necklace collection, featuring everything from elegant pendants and sleek chains to dramatic chokers, eye-catching statement pieces, and graceful lariat styles. Each necklace is meticulously crafted and embellished with premium materials for a look that’s both refined and unforgettable.</p>
+        </div>
+    </section>
+
+    <!-- RADIO BUTTONS FOR FILTERING -->
+    <input type="radio" id="show-all" name="category" checked>
+    <input type="radio" id="show-pendant" name="category">
+    <input type="radio" id="show-chain" name="category">
+    <input type="radio" id="show-choker" name="category">
+    <input type="radio" id="show-statement" name="category">
+    <input type="radio" id="show-lariat" name="category">
+
+    <!-- CATEGORY NAVIGATION -->
+    <div class="category-nav">
+        <label for="show-all" class="category-btn">All</label>
+        <label for="show-pendant" class="category-btn">Pendant</label>
+        <label for="show-chain" class="category-btn">Chain</label>
+        <label for="show-choker" class="category-btn">Choker</label>
+        <label for="show-statement" class="category-btn">Statement</label>
+        <label for="show-lariat" class="category-btn">Lariat</label>
+    </div>
+
+    <!-- PRODUCTS CONTAINER -->
+    <div class="products-container">
+
+        <!-- ALL PRODUCTS SECTION -->
+        <section class="all-products-section">
+            <div class="section-header">
+                <h2 class="category-title">All Necklaces</h2>
+            </div>
+            <div class="products-grid">
+                <!-- pendant necklace -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p1.jpg" alt="Gilded Swirl" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Gilded Swirl</h3>
+                        <p class="product-price">$1,200</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p2.jpg" alt="Azure Halo" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Azure Halo</h3>
+                        <p class="product-price">$1,450</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p3.jpg" alt="Sparkle Signature" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sparkle Signature</h3>
+                        <p class="product-price">$1,350</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p4.jpg" alt="Swan Radiance" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Swan Radiance</h3>
+                        <p class="product-price">$1,500</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p5.jpg" alt="The Surreal Hour" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Surreal Hour</h3>
+                        <p class="product-price">$1,650</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p6.jpg" alt="The Brilliance Drop" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Brilliance Drop</h3>
+                        <p class="product-price">$1,100</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+               
+                <!-- Chain Necklaces -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca1.jpg" alt="Linear Gleam" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Linear Gleam</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca2.jpg" alt="Polaris Link" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Polaris Link</h3>
+                        <p class="product-price">$180</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca3.jpg" alt="The Radiance Cascade" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Radiance Cascade</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca4.jpg" alt="The Whisper Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Whisper Chain</h3>
+                        <p class="product-price">$240</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca5.jpg" alt="The Gilded Curve" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Gilded Curve</h3>
+                        <p class="product-price">$150</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca6.jpg" alt="The Helix Gleam" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Helix Gleam</h3>
+                        <p class="product-price">$200</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Choker Necklaces -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co1.jpg" alt="The Duet Links" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Duet Links</h3>
+                        <p class="product-price">$195</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co2.jpg" alt="The Regal Fringe" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Regal Fringe</h3>
+                        <p class="product-price">$245</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co3.jpg" alt="The Triple Grace" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Triple Grace</h3>
+                        <p class="product-price">$165</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co4.jpg" alt="The Hammered Halo" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Hammered Halo</h3>
+                        <p class="product-price">$210</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co5.jpg" alt="The Golden Arc" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Golden Arc</h3>
+                        <p class="product-price">$285</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co6.jpg" alt="The Golden Cascade" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Golden Cascade</h3>
+                        <p class="product-price">$175</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Statement Bracelets -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s1.jpg" alt="The Diamond Tiers" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Diamond Tiers</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s2.jpg" alt="The Frosted Mosaic" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Frosted Mosaic</h3>
+                        <p class="product-price">$160</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s3.jpg" alt="The Silver Tangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Silver Tangle</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Lariat Bracelets -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l1.jpg" alt="The Luxe Drop" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Luxe Drop</h3>
+                        <p class="product-price">$420</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l2.jpg" alt="The Diamond Drift" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Diamond Drift</h3>
+                        <p class="product-price">$260</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l3.jpg" alt="The Tassel Empress" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Tassel Empress</h3>
+                        <p class="product-price">$340</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l4.jpg" alt="The Crystal Flow" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Crystal Flow</h3>
+                        <p class="product-price">$950</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l5.jpg" alt="The Sapphire Drape" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Sapphire Drape</h3>
+                        <p class="product-price">$310</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l6.jpg" alt="The Diamond Finale" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Diamond Finale</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pendant SECTION -->
+        <section id="pendant-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Pendant Necklaces</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p1.jpg" alt="The Gilded Swirl" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Gilded Swirl</h3>
+                        <p class="product-price">$1,200</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p2.jpg" alt="The Azure Halo" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Azure Halo</h3>
+                        <p class="product-price">$1,450</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p3.jpg" alt="The Sparkle Signature" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Sparkle Signature</h3>
+                        <p class="product-price">$1,350</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p4.jpg" alt="The Swan Radiance" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Swan Radiance</h3>
+                        <p class="product-price">$1,500</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p5.jpg" alt="The Surreal Hour" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Surreal Hour</h3>
+                        <p class="product-price">$1,650</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/p6.jpg" alt="The Brilliance Drop" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Brilliance Drop</h3>
+                        <p class="product-price">$1,100</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAIN  SECTION -->
+        <section id="chain-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Chain Necklaces</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca1.jpg" alt="Linear Gleam" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Linear Gleam</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca2.jpg" alt="Polaris Link" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Polaris Link</h3>
+                        <p class="product-price">$180</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca3.jpg" alt="The Radiance Cascade" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Radiance Cascade</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca4.jpg" alt="The Whisper Chain" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Whisper Chain</h3>
+                        <p class="product-price">$240</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca5.jpg" alt="The Gilded Curve" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Gilded Curve</h3>
+                        <p class="product-price">$150</p>
+                        <button class="cart-b">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/ca6.jpg" alt="The Helix Gleam" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Helix Gleam</h3>
+                        <p class="product-price">$200</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHOKER SECTION -->
+        <section id="choker-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Choker Necklaces</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co1.jpg" alt="The Duet Links" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Duet Links</h3>
+                        <p class="product-price">$195</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co2.jpg" alt="The Regal Fringe" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Regal Fringe</h3>
+                        <p class="product-price">$245</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co3.jpg" alt="The Triple Grace" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Triple Grace</h3>
+                        <p class="product-price">$165</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co4.jpg" alt="The Hammered Halo" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Hammered Halo</h3>
+                        <p class="product-price">$210</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co5.jpg" alt="The Golden Arc" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Golden Arc</h3>
+                        <p class="product-price">$285</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/co6.jpg" alt="The Golden Cascade" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Golden Cascade</h3>
+                        <p class="product-price">$175</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statement SECTION -->
+        <section id="statement-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Statement Necklaces</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s1.jpg" alt="The Diamond Tiers" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Diamond Tiers</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s2.jpg" alt="The Frosted Mosaic" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Frosted Mosaic</h3>
+                        <p class="product-price">$160</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s3.jpg" alt="The Silver Tangle" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Silver Tangle</h3>
+                        <p class="product-price">$320</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s4.jpg" alt="The Sculpted Gleam" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Sculpted Gleam</h3>
+                        <p class="product-price">$850</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s5.jpg" alt="The Golden Canopy" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Golden Canopy</h3>
+                        <p class="product-price">$240</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/s6.jpg" alt="The Triple Luxe" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Triple Luxe</h3>
+                        <p class="product-price">$290</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- lariat BRACELETS SECTION -->
+        <section id="lariat-section" class="category-section">
+            <div class="section-header">
+                <h2 class="category-title">Lariat Necklaces</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l1.jpg" alt="The Luxe Drop" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Luxe Drop</h3>
+                        <p class="product-price">$420</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l2.jpg" alt="The Diamond Drift" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Diamond Drift</h3>
+                        <p class="product-price">$260</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l3.jpg" alt="The Tassel Empress" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Tassel Empress</h3>
+                        <p class="product-price">$340</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l4.jpg" alt="The Crystal Flow" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Crystal Flow</h3>
+                        <p class="product-price">$950</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l5.jpg" alt="The Sapphire Drape" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Sapphire Drape</h3>
+                        <p class="product-price">$310</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="nek/l6.jpg" alt="The Diamond Finale" />
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Diamond Finale</h3>
+                        <p class="product-price">$280</p>
+                        <a href="cart-n.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About BEJEWELED</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Craftsmanship</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Collections</h3>
+                <ul>
+                    <li><a href="#">High Jewellery</a></li>
+                    <li><a href="#">Bracelets</a></li>
+                    <li><a href="#">Earrings</a></li>
+                    <li><a href="#">Necklaces</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BEJEWELED. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
