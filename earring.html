@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Earrings - BEJEWELED</title>
+    <title>Rings - BEJEWELED</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <style>
-        .root{
+        :root {
             --primary-blue: #00215E;
             --accent-yellow: #FFC55A;
             --text-dark: #1A1A1A;
             --text-light: #fff;
             --section-gray: #f5f5f5;
-          }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -28,6 +29,7 @@
             color: var(--text-dark);
             overflow-x: hidden;
         }
+
         .top-banner {
             background: #001947e3;
             padding: 12px 0;
@@ -38,11 +40,13 @@
             color: var(--accent-yellow);
             font-family: 'Playfair Display', serif;
         }
-      .banner-text {
+
+        .banner-text {
             color: var(--accent-yellow);
             text-decoration: underline;
             cursor: pointer;
         }
+
 
         /* HEADER */
         .header {
@@ -58,24 +62,23 @@
         }
 
         .header-left,
-        .header-right{
+        .header-right {
             display: flex;
             gap: 30px;
             align-items: center;
         }
 
-        .header-left a,
-        .header-right a{
+        .header-left a {
             color: var(--primary-blue);
             text-decoration: none;
             font-size: 12px;
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: color 0.2s;
             border-bottom: 2px solid transparent;
         }
-        .header-right a:hover,
+
         .header-left a:hover {
             color: var(--accent-yellow);
             border-bottom: 2px solid var(--accent-yellow);
@@ -84,10 +87,26 @@
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
-            font-weight: 300;
+            font-weight: 500;
             letter-spacing: 8px;
             color: var(--primary-blue);
             text-decoration: none;
+        }
+
+        .header-right a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .header-right a:hover {
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
         }
 
         /* NAVIGATION */
@@ -121,27 +140,12 @@
             color: #d4af37;
         }
 
-        .navigation a::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #d4af37;
-            transition: width 0.3s ease;
-        }
-
-        .navigation a:hover::after,
-        .navigation a.active::after {
-            width: 100%;
-        }
-
         /* HERO SECTION */
         .hero {
             position: relative;
-            height: 70vh;
+            height: 60vh;
             overflow: hidden;
+            background: #001947e3;
         }
 
         .hero img {
@@ -221,11 +225,11 @@
 
         /* Active state */
         #show-all:checked~.category-nav label[for="show-all"],
-        #show-stud:checked~.category-nav label[for="show-stud"],
-        #show-hoop:checked~.category-nav label[for="show-hoop"],
-        #show-drop:checked~.category-nav label[for="show-drop"],
-        #show-chandelier:checked~.category-nav label[for="show-chandelier"],
-        #show-huggie:checked~.category-nav label[for="show-huggie"] {
+        #show-pendant:checked~.category-nav label[for="show-pendant"],
+        #show-chain:checked~.category-nav label[for="show-chain"],
+        #show-choker:checked~.category-nav label[for="show-choker"],
+        #show-statement:checked~.category-nav label[for="show-statement"],
+        #show-lariat:checked~.category-nav label[for="show-lariat"] {
             background: #d4af37;
             color: #fff;
         }
@@ -243,28 +247,28 @@
             background: #f5f5f5;
         }
 
-        /* Show sections based on selected radio button */
+        /* Show sections based on radio */
         #show-all:checked~.products-container .all-products-section {
             display: block;
         }
 
-        #show-stud:checked~.products-container #stud-section {
+        #show-pendant:checked~.products-container #pendant-section {
             display: block;
         }
 
-        #show-hoop:checked~.products-container #hoop-section {
+        #show-chain:checked~.products-container #chain-section {
             display: block;
         }
 
-        #show-drop:checked~.products-container #drop-section {
+        #show-choker:checked~.products-container #choker-section {
             display: block;
         }
 
-        #show-chandelier:checked~.products-container #chandelier-section {
+        #show-statement:checked~.products-container #statement-section {
             display: block;
         }
 
-        #show-huggie:checked~.products-container #huggie-section {
+        #show-lariat:checked~.products-container #lariat-section {
             display: block;
         }
 
@@ -286,7 +290,7 @@
             margin: 0;
         }
 
-        /* PRODUCT GRID - 4 COLUMNS */
+        /* PRODUCT GRID - 4 COLUMNS LIKE RINGS.HTML */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -295,7 +299,7 @@
             margin: 0 auto;
         }
 
-        /* PRODUCT CARD - WHITE BACKGROUND */
+        /* PRODUCT CARD - WHITE BACKGROUND LIKE RINGS.HTML */
         .product-card {
             background: #fff;
             border-radius: 10px;
@@ -349,7 +353,7 @@
             margin-bottom: 15px;
         }
 
-        /* ADD TO CART BUTTON - GOLD */
+        /* ADD TO CART BUTTON - GOLD LIKE RINGS.HTML */
         .add-to-cart {
             background: #d4af37;
             border: none;
@@ -375,7 +379,7 @@
 
         /* FOOTER */
         .footer {
-            background:  var(--section-gray);
+            background: var(--section-gray);
             border-top: 1px solid #eee;
             padding: 60px 40px 30px;
             color: var(--primary-blue);
@@ -391,11 +395,11 @@
 
         .footer-section h3 {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 20px;
-            color: color: var(--primary-blue);
+            color: var(--primary-blue);
         }
 
         .footer-section ul {
@@ -407,10 +411,10 @@
         }
 
         .footer-section ul li a {
-            color: #ccc;
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 13px;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
 
         .footer-section ul li a:hover {
@@ -422,7 +426,7 @@
             padding-top: 30px;
             border-top: 1px solid #eee;
             margin-top: 40px;
-            color: #003392;;
+            color: #003392;
             font-size: 12px;
         }
 
@@ -1180,6 +1184,7 @@
 </body>
 
 </html>
+
 
 
 
