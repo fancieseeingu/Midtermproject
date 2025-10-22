@@ -9,13 +9,14 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <style>
-        :root{
+        :root {
             --primary-blue: #00215E;
             --accent-yellow: #FFC55A;
             --text-dark: #1A1A1A;
             --text-light: #fff;
             --section-gray: #f5f5f5;
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -28,7 +29,8 @@
             color: var(--text-dark);
             overflow-x: hidden;
         }
-        .top-banner{
+
+        .top-banner {
             background: #001947e3;
             padding: 12px 0;
             text-align: center;
@@ -38,12 +40,13 @@
             color: var(--accent-yellow);
             font-family: 'Playfair Display', serif;
         }
-        .banner-text{
+
+        .banner-text {
             color: var(--accent-yellow);
             text-decoration: underline;
             cursor: pointer;
         }
-    
+
 
         /* HEADER */
         .header {
@@ -59,7 +62,7 @@
         }
 
         .header-left,
-        .header-right{
+        .header-right {
             display: flex;
             gap: 30px;
             align-items: center;
@@ -133,7 +136,7 @@
 
         .navigation a.active {
             color: #d4af37;
-        } 
+        }
 
         /* HERO SECTION */
         .hero {
@@ -225,7 +228,7 @@
         #show-choker:checked~.category-nav label[for="show-choker"],
         #show-statement:checked~.category-nav label[for="show-statement"],
         #show-lariat:checked~.category-nav label[for="show-lariat"] {
-            background: #FFC55A;
+            background: #d4af37;
             color: #fff;
         }
 
@@ -273,7 +276,7 @@
             align-items: center;
             margin-bottom: 40px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #FFC55A;
+            border-bottom: 2px solid #d4af37;
         }
 
         .category-title {
@@ -333,7 +336,7 @@
             font-weight: 500;
             margin-bottom: 10px;
             letter-spacing: 0.5px;
-            color: #001947e3;
+            color: #2c3e50;
             min-height: 50px;
             display: flex;
             align-items: center;
@@ -343,14 +346,14 @@
         .product-price {
             font-size: 18px;
             font-weight: 600;
-            color: #FFC55A;
+            color: #d4af37;
             letter-spacing: 1px;
             margin-bottom: 15px;
         }
 
         /* ADD TO CART BUTTON - GOLD LIKE RINGS.HTML */
         .add-to-cart {
-            background: #FFC55A;
+            background: #d4af37;
             border: none;
             color: #fff;
             padding: 12px 30px;
@@ -456,6 +459,9 @@
 </head>
 
 <body>
+    <div class="top-banner">
+        <span class="banner-text">Experience magnificent craftsmanship and luxury with the new collection</span>
+    </div>
     <!-- HEADER -->
     <header class="header">
         <div class="header-left">
@@ -1428,6 +1434,7 @@
 
 
 </html>
+
 
 
 
