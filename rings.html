@@ -1,5 +1,4 @@
 
-You sent
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +10,13 @@ You sent
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <style>
+        :root{
+            --primary-blue: #00215E;
+            --accent-yellow: #FFC55A;
+            --text-dark: #1A1A1A;
+            --text-light: #fff;
+            --section-gray: #f5f5f5;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -19,10 +25,26 @@ You sent
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            background: #fff;
+            color: var(--text-dark);
             overflow-x: hidden;
         }
+        .top-banner{
+            background: #001947e3;
+            padding: 12px 0;
+            text-align: center;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #eee;
+            color: var(--accent-yellow);
+            font-family: 'Playfair Display', serif;
+        }
+        .banner-text{
+            color: var(--accent-yellow);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    
 
         /* HEADER */
         .header {
@@ -30,27 +52,29 @@ You sent
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: #000;
-            border-bottom: 1px solid #333;
+            background: var(--section-gray);
+            border-bottom: 1px solid #eee;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .header-left {
+        .header-left,
+        .header-right{
             display: flex;
             gap: 30px;
             align-items: center;
         }
 
         .header-left a {
-            color: #fff;
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 12px;
             font-weight: 400;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
         }
 
         .header-left a:hover {
@@ -60,26 +84,21 @@ You sent
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
-            font-weight: 300;
+            font-weight: 500;
             letter-spacing: 8px;
-            color: #fff;
+            color: var(--primary-blue);
             text-decoration: none;
         }
 
-        .header-right {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
         .header-right a {
-            color: #fff;
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 12px;
             font-weight: 400;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
         }
 
         .header-right a:hover {
@@ -92,23 +111,25 @@ You sent
             justify-content: center;
             gap: 60px;
             padding: 20px 0;
-            background: #000;
-            border-bottom: 1px solid #333;
+            background: var(--section-gray);
+            border-bottom: 1px solid #eee;
         }
 
         .navigation a {
-            color: #fff;
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: color 0.19s;
             position: relative;
+            border-bottom: 2px solid transparent;
         }
 
         .navigation a:hover {
-            color: #d4af37;
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
         }
 
         .navigation a.active {
@@ -354,9 +375,10 @@ You sent
 
         /* FOOTER */
         .footer {
-            background: #000;
-            border-top: 1px solid #333;
+            background: var(--section-gray);
+            border-top: 1px solid #eee;
             padding: 60px 40px 30px;
+            color: var(--primary-blue);
         }
 
         .footer-content {
@@ -369,11 +391,11 @@ You sent
 
         .footer-section h3 {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 20px;
-            color: #fff;
+            color: var(--primary-blue);
         }
 
         .footer-section ul {
@@ -385,22 +407,22 @@ You sent
         }
 
         .footer-section ul li a {
-            color: #ccc;
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 13px;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
 
         .footer-section ul li a:hover {
-            color: #d4af37;
+            color: var(--accent-yellow);
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid #333;
+            border-top: 1px solid #eee;
             margin-top: 40px;
-            color: #666;
+            color: #003392;
             font-size: 12px;
         }
 
@@ -436,6 +458,9 @@ You sent
 </head>
 
 <body>
+    <div class="top-banner">
+        <span class="banner-text">Experience magnificent craftsmanship and luxury with the new collection</span>
+    </div>
     <!-- HEADER -->
     <header class="header">
         <div class="header-left">
@@ -447,14 +472,14 @@ You sent
 
         <div class="header-right">
             <a href="login.html">My Account</a>
-            <a href="cart-r.html">Shopping Bag (0)</a>
+            <a href="cart-r.html">Shopping Cart</a>
         </div>
     </header>
 
     <!-- NAVIGATION -->
     <nav class="navigation">
-        <a href="mainpage.html">Home</a>
-        <a href="n.html">Necklaces</a>
+        <a href="main.html">Home</a>
+        <a href="necklace.html">Necklaces</a>
         <a href="bracelet.html">Bracelets</a>
         <a href="rings.html" class="active">Rings</a>
         <a href="earring.html">Earrings</a>
@@ -1307,7 +1332,7 @@ You sent
                 <h3>Collections</h3>
                 <ul>
                     <li><a href="bracelet.html">Bracelets</a></li>
-                    <li><a href="ring.html">Rings</a></li>
+                    <li><a href="rings.html">Rings</a></li>
                     <li><a href="earring.html">Earrings</a></li>
                     <li><a href="#">Necklaces</a></li>
                 </ul>
@@ -1328,5 +1353,6 @@ You sent
     </footer>
 
 </body>
+
 
 </html>
