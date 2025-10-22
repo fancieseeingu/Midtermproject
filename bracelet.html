@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bracelets - BEJEWELED</title>
+    <title>Rings - BEJEWELED</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
     <style>
-        :root {
-          --primary-blue: #00215E;
-          --accent-yellow: #FFC55A;
-          --text-dark: #1A1A1A;
-          --text-light: #fff;
-          --section-gray: #f5f5f5;
+        :root{
+            --primary-blue: #00215E;
+            --accent-yellow: #FFC55A;
+            --text-dark: #1A1A1A;
+            --text-light: #fff;
+            --section-gray: #f5f5f5;
         }
         * {
             margin: 0;
@@ -25,11 +25,10 @@
         body {
             font-family: 'Inter', sans-serif;
             background: #fff;
-            color: #fff;
             color: var(--text-dark);
             overflow-x: hidden;
         }
-        .top-banner {
+        .top-banner{
             background: #001947e3;
             padding: 12px 0;
             text-align: center;
@@ -44,18 +43,7 @@
             text-decoration: underline;
             cursor: pointer;
         }
-        .header{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;    
-            background: var(--section-gray);
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-      }
-            
+    
 
         /* HEADER */
         .header {
@@ -64,14 +52,20 @@
             align-items: center;
             padding: 15px 40px;
             background: var(--section-gray);
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #eee;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .header-left a,
-        .header-right a{
+        .header-left,
+        .header-right{
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .header-left a {
             color: var(--primary-blue);
             text-decoration: none;
             font-size: 12px;
@@ -82,27 +76,33 @@
             border-bottom: 2px solid transparent;
         }
 
-        .header-left a:hover,
-        .header-right a:hover{
-            color: var(--accent-yellow);
-            border-bottom: 2px solid var(--accent-yellow);
+        .header-left a:hover {
+            color: #d4af37;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
-            font-weight: 300;
+            font-weight: 500;
             letter-spacing: 8px;
-            color:var(--primary-blue);
+            color: var(--primary-blue);
             text-decoration: none;
         }
-        .header-left,
-        .header-right {
-            display: flex;
-            gap: 30px;
-            align-items: center;
+
+        .header-right a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
         }
-       
+
+        .header-right a:hover {
+            color: #d4af37;
+        }
 
         /* NAVIGATION */
         .navigation {
@@ -1431,5 +1431,6 @@
 </body>
 
 </html>
+
 
 
